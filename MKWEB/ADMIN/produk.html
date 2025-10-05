@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Produk - INSUVIT Admin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(143, 188, 79, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(107, 142, 35, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #f7faf3 0%, #eef5e5 50%, #f9fbf6 100%);
+            background-attachment: fixed;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo span {
+            font-size: 13px;
+            display: block;
+            opacity: 0.9;
+            margin-top: 2px;
+            font-style: italic;
+            color: #d4e5c1;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        header nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-logout {
+            background: #c74440;
+            font-weight: 600;
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        .sidebar-menu {
+            background: #fff;
+            padding: 25px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            border: 1px solid #e5ede0;
+        }
+
+        .sidebar-menu h3 {
+            color: #2d5016;
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #8fbc4f;
+        }
+
+        .sidebar-menu nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .sidebar-menu nav a {
+            color: #4a7c27;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: #f5f3ed;
+            transition: all 0.3s;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .sidebar-menu nav a:hover {
+            background: #fff;
+            border: 1px solid #8fbc4f;
+            transform: translateX(3px);
+        }
+
+        .sidebar-menu nav a.active {
+            background: linear-gradient(135deg, #6b8e23, #8fbc4f);
+            color: white;
+            font-weight: 600;
+        }
+
+        .content-area {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5ede0;
+        }
+
+        .content-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5ede0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-header h2 {
+            color: #2d5016;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .btn-add {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #6b8e23, #8fbc4f);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(107, 142, 35, 0.3);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .product-card {
+            background: #f9f8f4;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e5ede0;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border-color: #8fbc4f;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            cursor: zoom-in;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-image:hover {
+            filter: brightness(1.1);
+        }
+
+        .product-card h3 {
+            color: #2d5016;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .product-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit-prod {
+            flex: 1;
+            padding: 8px;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-edit-prod:hover {
+            background: #357abd;
+        }
+
+        .btn-delete-prod {
+            flex: 1;
+            padding: 8px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-delete-prod:hover {
+            background: #c0392b;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-close:hover {
+            background: #fff;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #d4e5c1;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .content-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://down-zl-id.img.susercontent.com/id-11134233-7r98v-lvytmmgyvlm235_tn.webp" alt="INSUVIT Logo">
+                </div>
+                <div>
+                    <h1>INSUVIT</h1>
+                    <span>Admin Dashboard</span>
+                </div>
+            </div>
+            
+            <nav>
+                <a href="admin.html">Dashboard</a>
+                <a href="datauser.html">Data User</a>
+                <a href="produk.html">Produk</a>
+                <a href="#" class="btn-logout">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <aside class="sidebar-menu">
+                <h3>Menu Admin</h3>
+                <nav>
+                    <a href="admin.html">📊 Dashboard</a>
+                    <a href="datauser.html">📋 Data User / Register</a>
+                    <a href="produk.html" class="active">🛍️ Kelola Produk</a>
+                    <a href="password.html">🔒 Edit Password</a>
+                </nav>
+            </aside>
+
+            <section class="content-area">
+                <div class="content-header">
+                    <h2>Kelola Produk</h2>
+                    <button class="btn-add">+ Tambah Produk</button>
+                </div>
+
+                <div class="product-grid">
+                    <div class="product-card">
+                        <!-- GANTI URL GAMBAR DI SINI -->
+                        <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7r98w-ltc4l1thiuk40d.webp');" data-img="https://down-id.img.susercontent.com/file/id-11134207-7r98w-ltc4l1thiuk40d.webp"></div>
+                        <h3>INSUVIT Original</h3>
+                        <p>Teh herbal original dengan khasiat lengkap</p>
+                        <p><strong>Rp 45.000</strong></p>
+                        <div class="product-actions">
+                            <button class="btn-edit-prod">Edit</button>
+                            <button class="btn-delete-prod">Hapus</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7rbk0-ma125x1h4q3h7b.webp');" data-img="https://down-id.img.susercontent.com/file/id-11134207-7rbk0-ma125x1h4q3h7b.webp"></div>
+                        <h3>INSUVIT Green Tea</h3>
+                        <p>Teh hijau premium untuk detox tubuh</p>
+                        <p><strong>Rp 50.000</strong></p>
+                        <div class="product-actions">
+                            <button class="btn-edit-prod">Edit</button>
+                            <button class="btn-delete-prod">Hapus</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7ras9-m59w1pgg1a541e.webp');" data-img="https://down-id.img.susercontent.com/file/id-11134207-7ras9-m59w1pgg1a541e.webp"></div>
+                        <h3>INSUVIT Diabetes</h3>
+                        <p>Khusus untuk penderita diabetes</p>
+                        <p><strong>Rp 55.000</strong></p>
+                        <div class="product-actions">
+                            <button class="btn-edit-prod">Edit</button>
+                            <button class="btn-delete-prod">Hapus</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7rase-m5cctx9w3zdfb8.webp');" data-img="https://down-id.img.susercontent.com/file/id-11134207-7rase-m5cctx9w3zdfb8.webp"></div>
+                        <h3>INSUVIT Premium</h3>
+                        <p>Paket premium isi 30 tea bags</p>
+                        <p><strong>Rp 75.000</strong></p>
+                        <div class="product-actions">
+                            <button class="btn-edit-prod">Edit</button>
+                            <button class="btn-delete-prod">Hapus</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 INSUVIT - Teh Herbal Alami Indonesia</p>
+    </footer>
+
+    <!-- Lightbox HTML -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Product Image">
+    </div>
+
+    <script>
+        // Lightbox functionality
+        const productImages = document.querySelectorAll('.product-image');
+
+        productImages.forEach(img => {
+            img.addEventListener('click', () => {
+                openLightbox(img.dataset.img);
+            });
+        });
+
+        function openLightbox(imgUrl) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgUrl;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close lightbox dengan ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

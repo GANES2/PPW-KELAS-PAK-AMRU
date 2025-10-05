@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimoni - INSUVIT Teh Herbal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(143, 188, 79, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(107, 142, 35, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #f7faf3 0%, #eef5e5 50%, #f9fbf6 100%);
+            background-attachment: fixed;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        a.logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        a.logo:hover {
+            opacity: 0.9;
+            transform: translateX(-3px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        a.logo:hover .logo-icon {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(143, 188, 79, 0.4);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo span {
+            font-size: 13px;
+            display: block;
+            opacity: 0.9;
+            margin-top: 2px;
+            font-style: italic;
+            color: #d4e5c1;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        header nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        header nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            padding: 12px 28px;
+            font-weight: 600;
+            color: #2d5016;
+        }
+
+        main {
+            flex: 1;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            color: #2d5016;
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* Testimonial Grid */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #e5ede0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(107, 142, 35, 0.2);
+            border-color: #8fbc4f;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .testimonial-info h4 {
+            color: #2d5016;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info p {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .testimonial-rating {
+            margin-bottom: 15px;
+            color: #ffd700;
+            font-size: 18px;
+        }
+
+        .testimonial-text {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 40px;
+            color: #e5ede0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #6b8e23, #8fbc4f);
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: #2d5016;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #d4e5c1;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .cta-section {
+                padding: 35px 25px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">
+                    <img src="https://down-zl-id.img.susercontent.com/id-11134233-7r98v-lvytmmgyvlm235_tn.webp" alt="INSUVIT Logo">
+                </div>
+                <div>
+                    <h1>INSUVIT</h1>
+                    <span>Teh Herbal Berkualitas Alami</span>
+                </div>
+            </a>
+            
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="produk-katalog.html">Produk</a>
+                <a href="manfaat.html">Manfaat</a>
+                <a href="testimoni.html" class="active">Testimoni</a>
+                <a href="registrasi.html" class="btn-register">Daftar Member</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Testimoni Pelanggan</h1>
+                <p>Apa kata mereka yang sudah merasakan manfaat INSUVIT</p>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">SR</div>
+                        <div class="testimonial-info">
+                            <h4>Siti Rahmawati</h4>
+                            <p>Jakarta • Member sejak 2023</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">Setelah rutin minum INSUVIT selama 3 bulan, berat badan saya turun 8kg! Yang paling saya suka, rasanya enak dan tidak bikin perut mules seperti produk lain.</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">BH</div>
+                        <div class="testimonial-info">
+                            <h4>Budi Hartono</h4>
+                            <p>Surabaya • Member sejak 2022</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">Sebagai penderita diabetes, INSUVIT sangat membantu mengontrol gula darah saya. Dokter juga bilang kondisi saya membaik. Terima kasih INSUVIT!</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">DW</div>
+                        <div class="testimonial-info">
+                            <h4>Dewi Wulandari</h4>
+                            <p>Bandung • Member sejak 2024</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">Kulit saya jadi lebih cerah dan glowing setelah rutin minum INSUVIT. Bonusnya, pencernaan jadi lancar dan badan terasa lebih ringan!</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">AM</div>
+                        <div class="testimonial-info">
+                            <h4>Ahmad Maulana</h4>
+                            <p>Yogyakarta • Member sejak 2023</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">Awalnya skeptis, tapi setelah coba INSUVIT kolesterol saya turun drastis dari 250 jadi 180. Sekarang jadi langganan!</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">LM</div>
+                        <div class="testimonial-info">
+                            <h4>Linda Marlina</h4>
+                            <p>Semarang • Member sejak 2024</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">INSUVIT membantu saya tidur lebih nyenyak dan bangun lebih segar. Stress kerja juga berkurang. Produk herbal terbaik yang pernah saya coba!</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <span class="quote-icon">"</span>
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">RP</div>
+                        <div class="testimonial-info">
+                            <h4>Rina Permata</h4>
+                            <p>Medan • Member sejak 2023</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">Setelah melahirkan, berat badan susah turun. Alhamdulillah dengan INSUVIT dan olahraga ringan, 2 bulan turun 6kg. Recommended banget!</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Jadilah Bagian dari Keluarga INSUVIT!</h2>
+                <p>Bergabunglah dengan ribuan pelanggan puas lainnya</p>
+                <a href="registrasi.html" class="btn-cta">Daftar Sekarang</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 INSUVIT - Teh Herbal Alami - Sukabumi Indonesia</p>
+    </footer>
+</body>
+</html>

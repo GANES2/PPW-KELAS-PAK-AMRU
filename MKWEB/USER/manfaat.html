@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manfaat - INSUVIT Teh Herbal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(143, 188, 79, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(107, 142, 35, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #f7faf3 0%, #eef5e5 50%, #f9fbf6 100%);
+            background-attachment: fixed;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        a.logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        a.logo:hover {
+            opacity: 0.9;
+            transform: translateX(-3px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        a.logo:hover .logo-icon {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(143, 188, 79, 0.4);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo span {
+            font-size: 13px;
+            display: block;
+            opacity: 0.9;
+            margin-top: 2px;
+            font-style: italic;
+            color: #d4e5c1;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        header nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        header nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            padding: 12px 28px;
+            font-weight: 600;
+            color: #2d5016;
+        }
+
+        main {
+            flex: 1;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            color: #2d5016;
+            font-size: 42px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .benefit-card {
+            background: #fff;
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #e5ede0;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(107, 142, 35, 0.2);
+            border-color: #8fbc4f;
+        }
+
+        .benefit-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            color: #2d5016;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .benefit-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #6b8e23, #8fbc4f);
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: white;
+            color: #2d5016;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #d4e5c1;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .cta-section {
+                padding: 35px 25px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">
+                    <img src="https://down-zl-id.img.susercontent.com/id-11134233-7r98v-lvytmmgyvlm235_tn.webp" alt="INSUVIT Logo">
+                </div>
+                <div>
+                    <h1>INSUVIT</h1>
+                    <span>Teh Herbal Berkualitas Alami</span>
+                </div>
+            </a>
+            
+            <nav>
+                <a href="home.html">Home</a>
+                <a href="produk-katalog.html">Produk</a>
+                <a href="manfaat.html" class="active">Manfaat</a>
+                <a href="testimoni.html">Testimoni</a>
+                <a href="registrasi.html" class="btn-register">Daftar Member</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Manfaat Teh Herbal INSUVIT</h1>
+                <p>Berbagai khasiat alami untuk kesehatan tubuh Anda</p>
+            </div>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Meningkatkan Imunitas</h3>
+                    <p>Kandungan antioksidan tinggi membantu meningkatkan sistem kekebalan tubuh dan melindungi dari radikal bebas</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌿</div>
+                    <h3>Detoksifikasi Alami</h3>
+                    <p>Membantu membersihkan racun dalam tubuh secara alami dan menjaga kesehatan organ vital</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">❤️</div>
+                    <h3>Menjaga Kesehatan Jantung</h3>
+                    <p>Membantu menurunkan kolesterol jahat dan menjaga kesehatan sistem kardiovaskular</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🍃</div>
+                    <h3>Kontrol Gula Darah</h3>
+                    <p>Formula khusus membantu mengatur kadar gula darah dan cocok untuk penderita diabetes</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚖️</div>
+                    <h3>Mengontrol Berat Badan</h3>
+                    <p>Membantu metabolisme tubuh dan proses pembakaran lemak secara alami</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">😌</div>
+                    <h3>Mengurangi Stress</h3>
+                    <p>Kandungan herbal alami membantu menenangkan pikiran dan meningkatkan kualitas tidur</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🧘</div>
+                    <h3>Meningkatkan Energi</h3>
+                    <p>Memberikan energi alami tanpa kafein berlebih untuk aktivitas sehari-hari</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">✨</div>
+                    <h3>Mencerahkan Kulit</h3>
+                    <p>Antioksidan tinggi membantu menjaga kesehatan kulit dari dalam dan memberikan efek glowing</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🦠</div>
+                    <h3>Anti-Inflamasi</h3>
+                    <p>Membantu mengurangi peradangan dalam tubuh dan meredakan nyeri sendi</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <h2>Rasakan Manfaatnya Sekarang!</h2>
+                <p>Bergabunglah dengan ribuan orang yang sudah merasakan khasiat INSUVIT</p>
+                <a href="registrasi.html" class="btn-cta">Daftar Sekarang</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 INSUVIT - Teh Herbal Alami - Sukabumi Indonesia</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSUVIT - Teh Herbal Berkualitas Alami Indonesia</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: 
+                radial-gradient(circle at 15% 20%, rgba(143, 188, 79, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(107, 142, 35, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #f7faf3 0%, #eef5e5 50%, #f9fbf6 100%);
+            background-attachment: fixed;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        a.logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        a.logo:hover {
+            opacity: 0.9;
+            transform: translateX(-3px);
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        a.logo:hover .logo-icon {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 6px 20px rgba(143, 188, 79, 0.4);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo span {
+            font-size: 13px;
+            display: block;
+            opacity: 0.9;
+            margin-top: 2px;
+            font-style: italic;
+            color: #d4e5c1;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        header nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        header nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #8fbc4f, #a8d36f);
+            padding: 12px 28px;
+            font-weight: 600;
+            color: #2d5016;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            color: #2d5016;
+            font-size: 52px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 20px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #6b8e23, #8fbc4f);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(107, 142, 35, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(107, 142, 35, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 18px 45px;
+            background: white;
+            color: #2d5016;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: 2px solid #8fbc4f;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f3ed;
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7r98w-ltc4l1thiuk40d.webp');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            cursor: zoom-in;
+            transition: all 0.3s;
+        }
+
+        .about-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-text h2 {
+            color: #2d5016;
+            font-size: 38px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .features h2 {
+            color: #2d5016;
+            font-size: 38px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 2px solid #e5ede0;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(107, 142, 35, 0.2);
+            border-color: #8fbc4f;
+        }
+
+        .feature-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: #2d5016;
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Products Preview */
+        .products-preview {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .products-preview h2 {
+            color: #2d5016;
+            font-size: 38px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: #f9f8f4;
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid #e5ede0;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(107, 142, 35, 0.2);
+            border-color: #8fbc4f;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            cursor: zoom-in;
+            transition: all 0.3s;
+        }
+
+        .product-image:hover {
+            filter: brightness(1.1);
+        }
+
+        .product-card h3 {
+            color: #2d5016;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .product-card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            color: #6b8e23;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 20px;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            color: #2d5016;
+            font-size: 38px;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            border: 2px solid #e5ede0;
+            text-align: left;
+        }
+
+        .testimonial-rating {
+            color: #ffd700;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-text {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: #2d5016;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        /* CTA Final dengan WhatsApp */
+        .cta-final {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #6b8e23, #8fbc4f);
+            text-align: center;
+            color: white;
+        }
+
+        .cta-final h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-final p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 45px;
+            background: white;
+            color: #2d5016;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-whatsapp svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .lightbox-close:hover {
+            background: #fff;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6620 50%, #4a7c27 100%);
+            color: #d4e5c1;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+            }
+
+            .cta-final h2 {
+                font-size: 32px;
+            }
+
+            .cta-final p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">
+                    <img src="https://down-zl-id.img.susercontent.com/id-11134233-7r98v-lvytmmgyvlm235_tn.webp" alt="INSUVIT Logo">
+                </div>
+                <div>
+                    <h1>INSUVIT</h1>
+                    <span>Teh Herbal Berkualitas Alami</span>
+                </div>
+            </a>
+            
+            <nav>
+                <a href="home.html" class="active">Home</a>
+                <a href="produk-katalog.html">Produk</a>
+                <a href="manfaat.html">Manfaat</a>
+                <a href="testimoni.html">Testimoni</a>
+                <a href="registrasi.html" class="btn-register">Daftar Member</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Teh Herbal Alami untuk Hidup Lebih Sehat</h1>
+            <p>INSUVIT menghadirkan solusi kesehatan alami dari bahan herbal pilihan berkualitas tinggi untuk menjaga kesehatan keluarga Indonesia</p>
+            <div class="hero-buttons">
+                <a href="registrasi.html" class="btn-primary">Daftar Sekarang</a>
+                <a href="produk-katalog.html" class="btn-secondary">Lihat Produk</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="about-content">
+            <div class="about-image" onclick="openLightbox('https://down-id.img.susercontent.com/file/id-11134207-7r98w-ltc4l1thiuk40d.webp')"></div>
+            <div class="about-text">
+                <h2>Mengapa Memilih INSUVIT?</h2>
+                <p>INSUVIT adalah teh herbal premium yang diformulasikan khusus dengan bahan-bahan alami pilihan terbaik. Setiap produk kami telah melalui proses seleksi ketat dan teruji secara klinis untuk memastikan kualitas dan khasiat yang optimal.</p>
+                <p>Dengan lebih dari 10 tahun pengalaman dalam industri herbal, kami berkomitmen memberikan produk berkualitas tinggi yang aman dan efektif untuk kesehatan Anda sekeluarga.</p>
+                <a href="manfaat.html" class="btn-primary">Pelajari Manfaatnya</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-container">
+            <h2>Keunggulan INSUVIT</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>100% Herbal Alami</h3>
+                    <p>Terbuat dari bahan herbal pilihan tanpa bahan kimia berbahaya</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>Teruji Klinis</h3>
+                    <p>Produk telah melalui uji laboratorium dan sertifikasi BPOM</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💪</div>
+                    <h3>Terbukti Efektif</h3>
+                    <p>Ribuan testimoni positif dari pelanggan puas</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Kualitas Premium</h3>
+                    <p>Standar produksi internasional dengan harga terjangkau</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Preview -->
+    <section class="products-preview">
+        <div class="products-container">
+            <h2>Produk Unggulan Kami</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7r98w-ltc4l1thiuk40d.webp');" onclick="openLightbox('https://down-id.img.susercontent.com/file/id-11134207-7r98w-ltc4l1thiuk40d.webp')"></div>
+                    <h3>INSUVIT Original</h3>
+                    <p>Teh herbal original untuk kesehatan optimal</p>
+                    <div class="product-price">Rp 45.000</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7rbk0-ma125x1h4q3h7b.webp');" onclick="openLightbox('https://down-id.img.susercontent.com/file/id-11134207-7rbk0-ma125x1h4q3h7b.webp')"></div>
+                    <h3>INSUVIT Green Tea</h3>
+                    <p>Teh hijau premium untuk detox tubuh</p>
+                    <div class="product-price">Rp 50.000</div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('https://down-id.img.susercontent.com/file/id-11134207-7ras9-m59w1pgg1a541e.webp');" onclick="openLightbox('https://down-id.img.susercontent.com/file/id-11134207-7ras9-m59w1pgg1a541e.webp')"></div>
+                    <h3>INSUVIT Diabetes</h3>
+                    <p>Khusus untuk penderita diabetes</p>
+                    <div class="product-price">Rp 55.000</div>
+                </div>
+            </div>
+            <a href="produk-katalog.html" class="btn-primary">Lihat Semua Produk</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <h2>Apa Kata Mereka?</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Setelah rutin minum INSUVIT, berat badan saya turun 8kg dalam 3 bulan! Rasanya enak dan tidak bikin mules."</p>
+                    <p class="testimonial-author">- Siti Rahmawati, Jakarta</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Sebagai penderita diabetes, INSUVIT sangat membantu mengontrol gula darah saya. Dokter juga bilang kondisi membaik!"</p>
+                    <p class="testimonial-author">- Budi Hartono, Surabaya</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">"Kulit saya jadi lebih cerah dan glowing setelah rutin minum INSUVIT. Pencernaan juga lancar!"</p>
+                    <p class="testimonial-author">- Dewi Wulandari, Bandung</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final dengan WhatsApp -->
+    <section class="cta-final">
+        <h2>Mulai Hidup Lebih Sehat Hari Ini!</h2>
+        <p>Hubungi kami melalui WhatsApp untuk konsultasi dan pemesanan</p>
+        <a href="https://wa.me/6281285340838?text=Halo%20INSUVIT,%20saya%20tertarik%20dengan%20produk%20teh%20herbal%20Anda" target="_blank" class="btn-whatsapp">
+            <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+            Hubungi via WhatsApp
+        </a>
+    </section>
+
+    <footer>
+        <p>© 2025 INSUVIT - Teh Herbal Alami - Sukabumi Indonesia</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+        <button class="lightbox-close" onclick="closeLightbox(event)">×</button>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Product Image">
+    </div>
+
+    <script>
+        function openLightbox(imgUrl) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = imgUrl;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close dengan ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
