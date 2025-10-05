@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPW Kelas Pak Amru - Telkom University</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Image with Overlay - LEBIH TRANSPARAN */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .bg-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://purwokerto.telkomuniversity.ac.id/wp-content/uploads/2025/02/MOCK-UP-TEL-U.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            filter: brightness(0.85); /* Lebih terang dari 0.7 */
+        }
+
+        .bg-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* OVERLAY LEBIH TRANSPARAN - opacity dikurangi */
+            background: linear-gradient(135deg, 
+                rgba(237, 30, 40, 0.45) 0%,    /* Dari 0.85 jadi 0.45 */
+                rgba(182, 37, 42, 0.50) 50%,   /* Dari 0.9 jadi 0.50 */
+                rgba(85, 86, 91, 0.45) 100%);  /* Dari 0.85 jadi 0.45 */
+            backdrop-filter: blur(1px); /* Blur dikurangi dari 2px jadi 1px */
+        }
+
+        /* Animated Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float linear infinite;
+            opacity: 0;
+        }
+
+        /* Particle Variants - Warna Telkom University */
+        .particle.red {
+            background: radial-gradient(circle, rgba(237, 30, 40, 0.6), rgba(237, 30, 40, 0));
+            box-shadow: 0 0 20px rgba(237, 30, 40, 0.4);
+        }
+
+        .particle.gray {
+            background: radial-gradient(circle, rgba(149, 149, 151, 0.5), rgba(149, 149, 151, 0));
+            box-shadow: 0 0 15px rgba(149, 149, 151, 0.3);
+        }
+
+        .particle.white {
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0) scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(var(--x-move)) scale(1) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Size Variants */
+        .particle.small { width: 8px; height: 8px; }
+        .particle.medium { width: 15px; height: 15px; }
+        .particle.large { width: 25px; height: 25px; }
+
+        /* Glassmorphism Header - Lebih Transparan */
+        header {
+            background: rgba(255, 255, 255, 0.08); /* Dari 0.12 jadi 0.08 */
+            backdrop-filter: blur(20px); /* Dari 25px jadi 20px */
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(237, 30, 40, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            color: white;
+            padding: 30px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        /* Logo Container Styling */
+        .logo-container {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container.left {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .logo-container.right {
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Logo Image Styling */
+        .logo-img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.5)) brightness(1.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            padding: 8px;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.15) rotate(5deg);
+            filter: drop-shadow(0 8px 25px rgba(237, 30, 40, 0.8)) brightness(1.2);
+        }
+
+        /* Logo Text Info */
+        .logo-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .logo-info h3, .logo-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        .logo-info p {
+            font-size: 12px;
+            opacity: 0.95;
+            font-weight: 500;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Header Text - Center */
+        .header-text {
+            flex: 1;
+            text-align: center;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-text h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            line-height: 1.2;
+            color: #fff;
+        }
+
+        .header-text p {
+            font-size: 17px;
+            font-weight: 500;
+            opacity: 0.95;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Glassmorphism Container - Lebih Transparan */
+        .container {
+            background: rgba(255, 255, 255, 0.10); /* Dari 0.15 jadi 0.10 */
+            backdrop-filter: blur(25px); /* Dari 30px jadi 25px */
+            -webkit-backdrop-filter: blur(25px);
+            padding: 60px 50px;
+            border-radius: 30px;
+            border: 2px solid rgba(237, 30, 40, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(237, 30, 40, 0.3) 0%,
+                transparent 50%,
+                rgba(237, 30, 40, 0.3) 100%);
+            border-radius: 30px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .welcome-icon {
+            font-size: 70px;
+            margin-bottom: 25px;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .container h2 {
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .container p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 18px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.6;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Button Styles - Telkom University Colors */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 20px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Warna Merah Telkom University #ED1E28 */
+        .btn-user {
+            background: linear-gradient(135deg, #ED1E28, #B6252A);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-user:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(237, 30, 40, 0.6);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Warna Abu-abu Telkom University #55565B */
+        .btn-admin {
+            background: linear-gradient(135deg, #55565B, #959597);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-admin:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(85, 86, 91, 0.6);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .btn-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Footer - Lebih Transparan */
+        footer {
+            background: rgba(255, 255, 255, 0.08); /* Dari 0.12 jadi 0.08 */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 2px solid rgba(237, 30, 40, 0.3);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 14px;
+            position: relative;
+            z-index: 10;
+        }
+
+        footer p {
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .header-content {
+                padding: 0 30px;
+                gap: 25px;
+            }
+
+            .logo-img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .logo-info h3, .logo-info h4 {
+                font-size: 14px;
+            }
+
+            .logo-info p {
+                font-size: 11px;
+            }
+
+            .header-text h1 {
+                font-size: 32px;
+            }
+
+            .header-text p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding: 0 20px;
+            }
+
+            .logo-container {
+                justify-content: center;
+            }
+
+            .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo-info {
+                align-items: center;
+            }
+
+            .logo-info h3, .logo-info h4 {
+                font-size: 13px;
+            }
+
+            .logo-info p {
+                font-size: 10px;
+            }
+
+            .header-text h1 {
+                font-size: 26px;
+            }
+
+            .header-text p {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 40px 30px;
+            }
+
+            .container h2 {
+                font-size: 24px;
+            }
+
+            .container p {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 18px 35px;
+                font-size: 16px;
+            }
+
+            .welcome-icon {
+                font-size: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 35px 25px;
+            }
+
+            .header-text h1 {
+                font-size: 22px;
+            }
+
+            .container h2 {
+                font-size: 20px;
+            }
+
+            .logo-img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-info h3, .logo-info h4 {
+                font-size: 12px;
+            }
+
+            .logo-info p {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Overlay with Telkom University Colors -->
+    <div class="bg-overlay"></div>
+
+    <!-- Animated Particles -->
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="header-content">
+            <!-- Logo Prodi - Kiri -->
+            <div class="logo-container left">
+                <img src="https://bse-pwt.telkomuniversity.ac.id/wp-content/uploads/2025/01/LOGO-SE-TEL-U-1536x326.png" alt="Logo Prodi Software Engineer" class="logo-img">
+                <div class="logo-info">
+                    <h3>SOFTWARE ENGINEER</h3>
+                    <p>Fakultas Informatika</p>
+                </div>
+            </div>
+
+            <!-- Header Text - Tengah -->
+            <div class="header-text">
+                <h1>PPW Kelas Pak Amru</h1>
+                <p>BELAJAR HTML WEB</p>
+            </div>
+
+            <!-- Logo Kampus - Kanan -->
+            <div class="logo-container right">
+                <div class="logo-info" style="text-align: right;">
+                    <h4>TELKOM UNIVERSITY PURWOKERTO</h4>
+                    <p>Purwokerto, Indonesia</p>
+                </div>
+                <img src="https://bse-pwt.telkomuniversity.ac.id/wp-content/uploads/2024/03/Logo-TUP-Horisontal-1536x680.png" alt="Logo Telkom University" class="logo-img">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="welcome-icon">👋</div>
+            <h2>Selamat Datang!</h2>
+            <p>Pilih portal yang ingin dikunjungi untuk melanjutkan ke bagian USER/ADMIN</p>
+            
+            <div class="button-group">
+                <a href="USER/home.html" class="btn btn-user">
+                    <span class="btn-icon">👤</span>
+                    Masuk ke Portal User
+                </a>
+                <a href="ADMIN/admin.html" class="btn btn-admin">
+                    <span class="btn-icon">⚙️</span>
+                    Masuk ke Portal Admin
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Kostan — Dibuat oleh Ganes</p>
+    </footer>
+
+    <script>
+        // Generate Animated Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['red', 'gray', 'white'];
+            const sizes = ['small', 'medium', 'large'];
+            const particleCount = 35; // Jumlah partikel
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = `particle ${colors[Math.floor(Math.random() * colors.length)]} ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Random animation duration (20-40 seconds)
+                const duration = 20 + Math.random() * 20;
+                particle.style.animationDuration = duration + 's';
+                
+                // Random delay
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                // Random horizontal movement
+                particle.style.setProperty('--x-move', (Math.random() - 0.5) * 200 + 'px');
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on page load
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
